@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Project 4</title>
+</head>
+
+<body>
+<script>
+        //top level code
+        var input1, input2; 
+        var input2string //Variable is for naming of bases
+        var stop;
+        var myArray=[]; //array 
+        var min;
+        var max;
+        do{
+            var newNumber = "";//letting javascript know that it is a string or empty word
+            input1 = getNumber();
+            myArray.push(input1)
+            input2 = getBase();
+            input2=baseNumber(input2); //call the baseNumber function here
+             if (input2==2) {
+                input2string="binary";
+            }
+             else if(input2==8)
+            {
+                input2string="octal";
+            }
+             else if(input2==16)
+            {
+                input2string="hexagonal";   
+            }
+            newNumber = baseConversion((input1),(input2));
+            alert ("Base 10 number: " + input1 + " is " + newNumber + " in " + input2string);
+            stop = prompt("press s to stop");
+       }while (stop !="s")
+       
+       
+         function getNumber() { //function getNumber prompts for inputs
+            var input1;
+            input1=Number(prompt("Enter an unsigned base 10 number: "));
+            while (input1<0) {
+                 input1=Number(prompt("Enter an unsigned base 10 number: "));
+            }
+            return input1;
+        }
+        function getBase() { 
+            var input2;
+            input2=prompt("Enter b for binary, o for octal, and h for hexadecimal: ");
+                while (input2 != "b" && input2 != "B" && input2 != "o" && input2 != "O" && input2 != "h" && input2 != "H") { //re-prompts if input is the wrong letter
+                    input2=prompt("Enter b for binary, o for octal, and h for hexadecimal: "); 
+                }
+            return input2;
+        }
+        function baseConversion(number, newBase) { //function performs base conversion
+            //var newNumber ="";
+            while (number>=1) { //while loop
+                var Answer=number%newBase;
+                Answer= hexConversion(Answer); 
+                newNumber = ""+Answer+newNumber;
+                number=Math.floor(number/newBase); 
+                //document.write ("<p>"+ Answer + "</p>");
+            }
+            return newNumber;
+        }
+        function myMax(myArray) { //function for finding the max
+            var currentMax=myArray[0];
+            for(var i=0; i<myArray.length; i++ ) { //for loop
+               if (currentMax<myArray[i]){
+               currentMax=myArray[i]; 
+               }
+            }
+            return currentMax;
+        }
+        function myMin(myArray) { //function for finding the min
+            var currentMin=myArray[0];
+            for(var i=0; i<myArray.length; i++ ){ //for loop
+                if (currentMin>myArray[i]) {
+                currentMin=myArray[i];
+                }
+            }
+            return currentMin;
+        }
+        function hexConversion(number) { //hexConversion function turns hexagon inputs to letters
+            switch (number) {
+                    case 10:
+                         number="A";
+                         break;
+                    case 11:
+                         number="B";
+                         break;
+                    case 12:
+                         number="C";
+                         break;
+                    case 13:
+                         number="D";
+                         break;
+                    case 14:
+                         number="E"
+                         break;
+                    case 15:
+                         number="F"
+                         break;
+                }
+            return number;
+        }
+        function baseNumber(input2) { //function converts character into a number
+            switch (input2) {
+                case "b" || "B":
+                input2=2;
+                break;
+                case "o" || "O":
+                input2=8;
+                break;
+                case "h" || "H":
+                input2=16;
+                break;
+            }
+            return input2;
+          }
+        max = myMax(myArray);
+        min = myMin(myArray);
+        alert ("Thank you for using this program \n The smallest value is " +  min + "\n The largest value is "+ max );  
+        //alert (myArray) 
+    </script>  
+</body>
+</html>
